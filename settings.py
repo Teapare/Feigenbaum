@@ -20,6 +20,7 @@ class Button:
 
     def get_click(self, pos):
         if self.pos[0] <= pos[0] <= self.pos[0] + self.size[0] and self.pos[1] <= pos[1] <= self.pos[1] + self.size[1]:
+            print("BBBBB")
             self.function()
             return True
         return False
@@ -73,6 +74,7 @@ class SettingsWindow:
             if field.get_click(pos):
                 field.active = True
                 field.caret_visible = True
+        self.draw_btn.get_click(pos)
 
     def key_press(self, key):
         if key in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6, pygame.K_7, pygame.K_8,

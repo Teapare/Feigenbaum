@@ -45,6 +45,7 @@ class App:
                 self.settings.key_press(event.key)
 
             if event.type == pygame.USEREVENT:
+                print("AAAAA")
                 self.custom_graph_redraw()
 
     def custom_graph_redraw(self):
@@ -54,7 +55,9 @@ class App:
             self.settings.maxx.text), float(self.settings.maxy.text)
         w, h = w - x, h - y
         self.graph.redraw_surf((x, y, w, h), self.settings.z, self.steps)
-        # TODO: change previewer selected rectangle as well.
+        w, h = w / 4 * self.previewer.size_nb[0], h * self.previewer.size_nb[1]
+        x, y = x * self.previewer.size_nb[0] / 4 + self.previewer.pos_nb[0], (1 - y) * self.previewer.size_nb[1] + self.previewer.pos_nb[1] - h
+        self.previewer.selected_rect.update(x, y, w, h)
 
     def update(self):
         t = self.timer.tick(self.fps)
@@ -66,7 +69,7 @@ class App:
         self.screen.fill(BG_COLOR)
         self.previewer.draw()
         self.graph.draw()
-        # self.ruler.draw()
+        self.ruler.draw()
         self.settings.draw()
 
         pygame.display.flip()
