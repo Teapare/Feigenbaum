@@ -23,3 +23,15 @@ class Ruler:
                          2)
         pygame.draw.line(self.parent, BLACK, (self.pos[0], self.pos[1] + self.size[1]),
                          (self.pos[0] - self.width, self.pos[1] + self.width + self.size[1]), 2)
+        for i in range(10):
+            pygame.draw.line(self.parent, BLACK, (self.pos[0] + self.size[0] * i / 10, self.pos[1] + self.size[1]),
+                             (self.pos[0] + self.size[0] * i / 10, self.pos[1] + self.size[1] + self.width / 2), 2)
+            pygame.draw.line(self.parent, BLACK, (self.pos[0], self.pos[1] + self.size[1] * (i + 1) / 10),
+                             (self.pos[0] - self.width / 2, self.pos[1] + self.size[1] * (i + 1) / 10), 2)
+            for k in range(10):
+                pygame.draw.line(self.parent, BLACK,
+                                 (self.pos[0] + self.size[0] * (i / 10 + k / 100), self.pos[1] + self.size[1]),
+                                 (self.pos[0] + self.size[0] * (i / 10 + k / 100),
+                                  self.pos[1] + self.size[1] + self.width / 8))
+                pygame.draw.line(self.parent, BLACK, (self.pos[0], self.pos[1] + self.size[1] * (i / 10 + k / 100)),
+                                 (self.pos[0] - self.width / 8, self.pos[1] + self.size[1] * (i / 10 + k / 100)))
