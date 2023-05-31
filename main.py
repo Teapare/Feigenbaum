@@ -10,10 +10,10 @@ class App:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode(WINDOW_SIZE)
-        self.graph = Graph(self.screen, (400, 10), (606, 606), 3)
+        self.graph = Graph(self.screen, (400, 90), (606, 606), 3)
         self.previewer = Previewer(self.screen, (10, 10), (208, 208), 4, self.graph.surface)
-        self.ruler = Ruler(self.screen, (400, 10), (606, 606), 75)
-        self.settings = SettingsWindow(self.screen, (50, 250), (200, 300))
+        self.ruler = Ruler(self.screen, (400, 90), (606, 606), 75)
+        self.settings = SettingsWindow(self.screen, (10, 250), (200, 220))
 
         self.steps = 1000
         self.graph.redraw = True
@@ -24,6 +24,8 @@ class App:
     def handle_events(self):
         events = pygame.event.get()
         for event in events:
+            if event.type == pygame.MOUSEMOTION:
+                self.graph.get_in_area(event.pos)
             if event.type == pygame.QUIT:
                 self.running = False
 
@@ -64,12 +66,20 @@ class App:
         self.previewer.update()
         self.graph.update(self.previewer.get_selected(), self.settings.z, self.steps)
         self.settings.update(t)
+        x1, y1, x2, y2 = self.previewer.get_selected()
+        x1, y1, = x1 + x2 / 2, y1 + y2 / 2
+        x2, y2 = max(x2 / 4, y2) * 4, max(x2 / 4, y2)
+        x1 -= x2 / 2
+        y1 -= y2 / 2
+        x2 += x1
+        y2 += y1
+        self.ruler.update((x1, x2), (y1, y2))
 
     def draw(self):
         self.screen.fill(BG_COLOR)
         self.previewer.draw()
-        self.graph.draw()
         self.ruler.draw()
+        self.graph.draw(self.previewer.get_selected(), self.ruler.width)
         self.settings.draw()
 
         pygame.display.flip()

@@ -32,10 +32,10 @@ class SettingsWindow:
         self.surface = surf
         self.pos = pos
         self.size = size
-        self.minx = TextField(surf, (pos[0] + 20, pos[1] + 10), (150, 30), (0, 4))
-        self.maxx = TextField(surf, (pos[0] + 20, pos[1] + 50), (150, 30), (float(self.minx.text or 0), 4))
-        self.miny = TextField(surf, (pos[0] + 20, pos[1] + 90), (150, 30), (0, 1))
-        self.maxy = TextField(surf, (pos[0] + 20, pos[1] + 130), (150, 30), (0, 1))
+        self.minx = TextField(surf, (pos[0] + 20, pos[1] + 10), (150, 30), (0, 4), "min x")
+        self.maxx = TextField(surf, (pos[0] + 20, pos[1] + 50), (150, 30), (float(self.minx.text or 0), 4), "max x")
+        self.miny = TextField(surf, (pos[0] + 20, pos[1] + 90), (150, 30), (0, 1), "min y")
+        self.maxy = TextField(surf, (pos[0] + 20, pos[1] + 130), (150, 30), (0, 1), "max y")
         self.draw_btn = Button(surf, (pos[0] + 20, pos[1] + 170), (60, 30), "Draw",
                                lambda: pygame.event.post(pygame.event.Event(pygame.USEREVENT)))
         self.fields = self.minx, self.maxx, self.miny, self.maxy

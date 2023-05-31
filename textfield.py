@@ -1,10 +1,10 @@
 import pygame
 
-from constants import GRAPH_COLOR, BLACK
+from constants import GRAPH_COLOR, BLACK, GRAY
 
 
 class TextField:
-    def __init__(self, surf, pos, size, limit):
+    def __init__(self, surf, pos, size, limit, placeholdertext=""):
         self.surface = surf
         self.active = False
         self.limit = limit
@@ -19,15 +19,17 @@ class TextField:
         self.maxlen = 12
         self.font = pygame.font.SysFont("Arial", 25)
         self.picture = None
+        self.placeholdertext = placeholdertext
+        self.redraw()
 
     def connect(self, func):
         self.enter = func
 
     def redraw(self):
         if not self.text:
-            self.picture = pygame.Surface((0, 0))
-            return
-        picture = self.font.render(self.text, True, BLACK)
+            picture = self.font.render(self.placeholdertext, True, GRAY)
+        else:
+            picture = self.font.render(self.text, True, BLACK)
         scale = picture.get_height() / (self.size[1] - 8)
         self.picture = picture
         # self.picture = pygame.transform.scale(picture, (picture.get_width() / scale, picture.get_height() / scale))
