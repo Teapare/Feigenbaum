@@ -44,17 +44,19 @@ class Graph:
         else:
             self.selected = (0, 0)
 
-    def draw(self, rect, rulerw):
+    def draw(self, rect, ruler):
         pygame.draw.rect(self.parent, BLACK, (self.pos, self.size), width=self.b_width)
         self.parent.blit(self.surface, self.pos_nb)
         if self.selected[0]:
             pygame.draw.line(self.parent, RED, (self.pos_nb[0] + self.selected[0], self.pos_nb[1]),
                              (self.pos_nb[0] + self.selected[0], self.pos_nb[1] + self.size_nb[1]))
-            text = self.font.render(f"{rect[0] + rect[2] * self.selected[0] / self.size_nb[0]:.2f}", True, RED)
+            text = self.font.render(f"{ruler.xrange[0] + (ruler.xrange[1] - ruler.xrange[0]) * self.selected[0] / self.size_nb[0]:.2f}", True, RED)
             self.parent.blit(text, (
-            self.pos_nb[0] + self.selected[0] - text.get_width() * 0.5, self.pos[1] + self.size[1] + rulerw * 0.5))
+                self.pos_nb[0] + self.selected[0] - text.get_width() * 0.5,
+                self.pos[1] + self.size[1] + ruler.width * 0.5))
             self.parent.blit(text, (
-            self.pos_nb[0] + self.selected[0] - text.get_width() * 0.5, self.pos[1] - rulerw * 0.5 - text.get_height()))
+                self.pos_nb[0] + self.selected[0] - text.get_width() * 0.5,
+                self.pos[1] - ruler.width * 0.5 - text.get_height()))
             distance = 0
             while distance < self.size_nb[1]:
                 if self.selected[1] + distance < self.size_nb[1] and self.surface.get_at(

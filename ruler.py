@@ -75,16 +75,3 @@ class Ruler:
         self.parent.blit(text, (
             self.pos[0] - text.get_width() - self.width / 2, self.pos[1] - text.get_height() / 2))
         self.parent.blit(text, (self.pos[0] + self.size[0] + self.width / 2, self.pos[1] - text.get_height() / 2))
-
-        # for i in range(1, 11):
-        #     offset = i / 10
-        #     text = self.font.render(f"{(self.xrange[1] - self.xrange[0]) * offset:e}", True, BLACK)
-        #     self.parent.blit(text, (self.pos[0] + offset * self.size[0] - text.get_width() * 0.5,
-        #                             self.pos[1] + self.size[1] + self.width * 0.5))
-        #     self.parent.blit(text, (self.pos[0] + offset * self.size[0] - text.get_width() * 0.5,
-        #                             self.pos[1] - text.get_height() - self.width * 0.5))
-        #     text = self.font.render(f"{(self.yrange[1] - self.yrange[0]) * offset}", True, BLACK)
-        #     self.parent.blit(text, (self.pos[0] - self.width * 0.5 - text.get_width(),
-        #                             self.pos[1] + offset * self.size[1] - text.get_height() * 0.5))
-        #     self.parent.blit(text, (self.pos[0] + self.size[0] + self.width * 0.5,
-        #                             self.pos[1] + offset * self.size[1] - text.get_height() * 0.5))

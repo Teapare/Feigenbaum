@@ -47,7 +47,6 @@ class App:
                 self.settings.key_press(event.key)
 
             if event.type == pygame.USEREVENT:
-                print("AAAAA")
                 self.custom_graph_redraw()
 
     def custom_graph_redraw(self):
@@ -79,7 +78,7 @@ class App:
         self.screen.fill(BG_COLOR)
         self.previewer.draw()
         self.ruler.draw()
-        self.graph.draw(self.previewer.get_selected(), self.ruler.width)
+        self.graph.draw(self.previewer.get_selected(), self.ruler)
         self.settings.draw()
 
         pygame.display.flip()

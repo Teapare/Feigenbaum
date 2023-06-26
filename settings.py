@@ -20,7 +20,6 @@ class Button:
 
     def get_click(self, pos):
         if self.pos[0] <= pos[0] <= self.pos[0] + self.size[0] and self.pos[1] <= pos[1] <= self.pos[1] + self.size[1]:
-            print("BBBBB")
             self.function()
             return True
         return False
